@@ -1,0 +1,750 @@
+openapi: 3.0.3
+servers:
+  - url: 'http://127.0.0.1:8223/127.0.0.1:8222'
+  - url: 'http://127.0.0.1:8223/sync.ankiweb.net'
+info:
+  description: Api for Anki Synchronization
+  version: 0.0.1
+  title: Anki Sync Api
+  license:
+    name: public domain
+tags:
+  - name: logIn
+  - name: dataSync
+  - name: mediaSync
+  - name: fullSync
+paths:
+  /sync/hostKey:
+    post:
+      tags:
+        - logIn
+      operationId: getHostKey
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostKey'
+  /sync/meta:
+    post:
+      tags:
+        - dataSync
+      operationId: getMeta
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meta'
+  /sync/start:
+    post:
+      tags:
+        - dataSync
+      operationId: start
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Graves'
+  /sync/applyChanges:
+    post:
+      tags:
+        - dataSync
+      operationId: applyChanges
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Changes'
+  /sync/abort:
+    post:
+      tags:
+        - dataSync
+      operationId: abort
+      requestBody:
+        $ref: '#/components/requestBodies/AuthRB'
+      responses:
+        '200':
+          description: OK
+  /sync/chunk:
+    post:
+      tags:
+        - dataSync
+      operationId: chunk
+      requestBody:
+        $ref: '#/components/requestBodies/AuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chunk'
+  /sync/applyChunk:
+    post:
+      tags:
+        - dataSync
+      operationId: applyChunk
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithAuthRB'
+      responses:
+        '200':
+          description: OK
+  /sync/sanityCheck2:
+    post:
+      tags:
+        - dataSync
+      operationId: sanityCheck2
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SanityResult'
+  /sync/finish:
+    post:
+      tags:
+        - dataSync
+      operationId: finish
+      requestBody:
+        $ref: '#/components/requestBodies/AuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: number
+  /msync/begin:
+    post:
+      tags:
+        - mediaSync
+      operationId: startMediaSync
+      requestBody:
+        $ref: '#/components/requestBodies/HostKeyAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaStartResult'
+  /msync/mediaChanges:
+    post:
+      tags:
+        - mediaSync
+      operationId: getMediaChanges
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithSessionAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMediaChangesResult'
+  /msync/downloadFiles:
+    post:
+      tags:
+        - mediaSync
+      operationId: downloadFiles
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithSessionAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+  /msync/uploadChanges:
+    post:
+      tags:
+        - mediaSync
+      operationId: uploadMediaChanges
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithSessionAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadMediaChangesResult'
+  /msync/mediaSanity:
+    post:
+      tags:
+        - mediaSync
+      operationId: checkMediaSanity
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithSessionAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaSanityResult'
+  /sync/upload:
+    post:
+      tags:
+        - fullSync
+      operationId: uploadFull
+      requestBody:
+        $ref: '#/components/requestBodies/PayloadWithHostKeyAuthRB'
+      responses:
+        '200':
+          description: OK
+  /sync/download:
+    post:
+      tags:
+        - fullSync
+      operationId: downloadFull
+      requestBody:
+        $ref: '#/components/requestBodies/HostKeyAuthRB'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    Payload:
+      type: object
+      properties:
+        c:
+          type: integer
+          minimum: 0
+          maximum: 1
+          example: 0
+          description: GZip compression enabled
+        data:
+          type: string
+          format: binary
+      required:
+        - c
+        - data
+    Auth:
+      type: object
+      description: authentication object used during the not-media synchronization
+      properties:
+        k:
+          type: string
+          description: server-defined HostKey - used to authenticate the user
+        s:
+          type: string
+          description: app-defined SessionKey - used to identify the session
+      required:
+        - k
+        - s
+    PayloadWithAuth:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Payload'
+        - $ref: '#/components/schemas/Auth'
+    Credentials:
+      properties:
+        u:
+          type: string
+        p:
+          type: string
+    HostKey:
+      properties:
+        key:
+          type: string
+    Versions:
+      type: object
+      properties:
+        v:
+          type: string
+        cv:
+          type: string
+    Meta:
+      type: object
+      properties:
+        mod:
+          type: integer
+        scm:
+          type: integer
+        usn:
+          type: integer
+        ts:
+          type: integer
+        musn:
+          type: integer
+        uname:
+          type: string
+        msg:
+          type: string
+        cont:
+          type: boolean
+        hostNum:
+          type: integer
+    Start:
+      type: object
+      properties:
+        minUsn:
+          type: integer
+        lnewer:
+          type: boolean
+        graves:
+          $ref: '#/components/schemas/Graves'
+    Graves:
+      type: object
+      properties:
+        cards:
+          type: array
+          items:
+            type: integer
+        notes:
+          type: array
+          items:
+            type: integer
+        decks:
+          type: array
+          items:
+            type: integer
+    ChangesPayload:
+      type: object
+      properties:
+        changes:
+          $ref: '#/components/schemas/Changes'
+    Changes:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            type: object
+            properties:
+              sortf:
+                type: integer
+              did:
+                type: integer
+              latexPre:
+                type: string
+              latexPost:
+                type: string
+              latexsvg:
+                type: boolean
+              mod:
+                type: integer
+              usn:
+                type: integer
+              type:
+                type: integer
+              css:
+                type: string
+              name:
+                type: string
+              flds:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    ord:
+                      type: integer
+                    sticky:
+                      type: boolean
+                    rtl:
+                      type: boolean
+                    font:
+                      type: string
+                    size:
+                      type: integer
+                  required:
+                    - name
+                    - ord
+                    - sticky
+                    - rtl
+                    - font
+                    - size
+              tmpls:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    ord:
+                      type: integer
+                    qfmt:
+                      type: string
+                    afmt:
+                      type: string
+                    did:
+                      type: string
+                      nullable: true
+                    bqfmt:
+                      type: string
+                    bafmt:
+                      type: string
+                    bfont:
+                      type: string
+                    bsize:
+                      type: integer
+                  required:
+                    - name
+                    - ord
+                    - qfmt
+                    - afmt
+                    - did
+                    - bqfmt
+                    - bafmt
+                    - bfont
+                    - bsize
+              id:
+                type: integer
+              req:
+                type: array
+                items:
+                  type: array
+                  items:
+                    anyOf:
+                      - type: integer
+                      - type: string
+                        enum:
+                          - none
+                          - all
+                          - any
+                      - type: array
+                        items:
+                          type: integer
+            required:
+              - sortf
+              - did
+              - latexPre
+              - latexPost
+              - latexsvg
+              - mod
+              - usn
+              - type
+              - css
+              - name
+              - flds
+              - tmpls
+              - id
+              - req
+        decks:
+          type: array
+          items:
+            type: object
+            properties:
+              newToday:
+                type: array
+                minimum: 2
+                maximum: 2
+                items:
+                  type: array
+                  items:
+                    type: integer
+              revToday:
+                type: array
+                minimum: 2
+                maximum: 2
+                items:
+                  type: array
+                  items:
+                    type: integer
+              lrnToday:
+                type: array
+                minimum: 2
+                maximum: 2
+                items:
+                  type: array
+                  items:
+                    type: integer
+              timeToday:
+                type: array
+                minimum: 2
+                maximum: 2
+                items:
+                  type: array
+                  items:
+                    type: integer
+              conf:
+                type: integer
+              usn:
+                type: integer
+              desc:
+                type: string
+              dyn:
+                type: integer
+              collapsed:
+                type: boolean
+              browserCollapsed:
+                type: boolean
+              extendNew:
+                type: integer
+              extendRev:
+                type: integer
+              name:
+                type: string
+              id:
+                type: integer
+              mod:
+                type: integer
+            required:
+              - newToday
+              - revToday
+              - lrnToday
+              - timeToday
+              - conf
+              - usn
+              - desc
+              - dyn
+              - collapsed
+              - browserCollapsed
+              - extendNew
+              - extendRev
+              - name
+              - id
+              - mod
+        tags:
+          type: array
+          items:
+            type: string
+        conf:
+          type: object
+          properties:
+            curDeck:
+              type: integer
+              description: The id of the last selected deck
+            activeDecks:
+              type: array
+              items:
+                type: integer
+              description: The ids of the last selected deck and its sub-decks
+            newSpread:
+              type: integer
+              minimum: 0
+              maximum: 2
+              description: '0 - Mix new cards with reviews, 1 - New cards last, 2 - New cards first'
+            collapseTime:
+              type: integer
+            timeLim:
+              type: integer
+            estTimes:
+              type: boolean
+            dueCounts:
+              type: boolean
+            curModel:
+              type: integer
+            nextPos:
+              type: integer
+            sortType:
+              type: string
+            sortBackwards:
+              type: string
+            addToCur:
+              type: boolean
+            dayLearnFirst:
+              type: boolean
+            newBury:
+              type: boolean
+            schedVer:
+              type: integer
+            rollover:
+              type: integer
+        crt:
+          type: integer
+          format: timestamp
+    ChunkPayload:
+      type: object
+      properties:
+        changes:
+          $ref: '#/components/schemas/Chunk'
+    Chunk:
+      type: object
+      properties:
+        done:
+          type: boolean
+        notes:
+          type: array
+          items:
+            type: array
+            minimum: 11
+            maximum: 11
+            items:
+              allOf:
+                - type: integer
+                - type: string
+        cards:
+          type: array
+          items:
+            type: array
+            minimum: 18
+            maximum: 18
+            items:
+              allOf:
+                - type: integer
+                - type: string
+        revlog:
+          type: array
+          items:
+            type: array
+            minimum: 9
+            maximum: 9
+            items:
+              type: integer
+    SanityParams:
+      type: object
+      properties:
+        client:
+          type: array
+    SanityResult:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+    SessionAuth:
+      type: object
+      properties:
+        sk:
+          type: string
+          description: server-defined SessionKey - used to identify the session
+      required:
+        - sk
+    HostKeyAuth:
+      type: object
+      properties:
+        k:
+          type: string
+          description: server-defined HostKey - used to authenticate the user
+        v:
+          type: string
+      required:
+        - k
+        - v
+    PayloadWithSessionAuth:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Payload'
+        - $ref: '#/components/schemas/SessionAuth'
+    PayloadWithHostKeyAuth:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Payload'
+        - $ref: '#/components/schemas/HostKeyAuth'
+    MediaStartResult:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            sk:
+              type: string
+            usn:
+              type: integer
+        err:
+          type: string
+    GetMediaChangesParams:
+      type: object
+      properties:
+        lastUsn:
+          type: integer
+    GetMediaChangesResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+            items:
+              minimum: 3
+              maximum: 3
+              nullable: true
+              allOf:
+                - type: integer
+                - type: string
+      err:
+        type: string
+    DownloadFilesParams:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+    UploadMediaChangesResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: integer
+        err:
+          type: string
+    MediaSanityParams:
+      type: object
+      properties:
+        local:
+          type: integer
+    MediaSanityResult:
+      type: object
+      properties:
+        data:
+          type: string
+        err:
+          type: string
+  requestBodies:
+    PayloadRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Payload'
+    AuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Auth'
+    PayloadWithAuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/PayloadWithAuth'
+    HostKeyAuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/HostKeyAuth'
+    PayloadWithSessionAuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/PayloadWithSessionAuth'
+    PayloadWithHostKeyAuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/PayloadWithHostKeyAuth'
