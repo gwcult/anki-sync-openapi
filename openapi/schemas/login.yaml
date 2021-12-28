@@ -1,0 +1,10 @@
+Credentials:
+  properties:
+    u:
+      type: string
+    p:
+      type: string
+HostKey:
+  properties:
+    key:
+      type: string

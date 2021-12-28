@@ -1,0 +1,63 @@
+MediaStartResult:
+  type: object
+  properties:
+    data:
+      $ref: "#/MediaStartResultData"
+    err:
+      type: string
+MediaStartResultData:
+  type: object
+  properties:
+    sk:
+      type: string
+    usn:
+      type: integer
+GetMediaChangesParams:
+  type: object
+  properties:
+    lastUsn:
+      type: integer
+GetMediaChangesResult:
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        type: array
+        items:
+          minimum: 3
+          maximum: 3
+          nullable: true
+          allOf:
+          - type: integer
+          - type: string
+  err:
+    type: string
+DownloadFilesParams:
+  type: object
+  properties:
+    files:
+      type: array
+      items:
+        type: string
+UploadMediaChangesResult:
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        type: integer
+    err:
+      type: string
+MediaSanityParams:
+  type: object
+  properties:
+    local:
+      type: integer
+MediaSanityResult:
+  type: object
+  properties:
+    data:
+      type: string
+    err:
+      type: string

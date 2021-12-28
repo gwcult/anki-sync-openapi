@@ -1,0 +1,122 @@
+Model:
+  type: object
+  properties:
+    sortf:
+      type: integer
+    did:
+      type: integer
+    latexPre:
+      type: string
+    latexPost:
+      type: string
+    latexsvg:
+      type: boolean
+    mod:
+      type: integer
+    usn:
+      type: integer
+    type:
+      type: integer
+    css:
+      type: string
+    name:
+      type: string
+    flds:
+      type: array
+      items:
+        $ref: "#/ModelField"
+    tmpls:
+      type: array
+      items:
+        $ref: "#/ModelTemplate"
+    id:
+      type: integer
+    req:
+      type: array
+      items: 
+        $ref: "#/ModelRequirements"
+  required:
+  - sortf
+  - did
+  - latexPre
+  - latexPost
+  - latexsvg
+  - mod
+  - usn
+  - type
+  - css
+  - name
+  - flds
+  - tmpls
+  - id
+  - req
+  
+ModelRequirements:
+  type: array
+  items:
+    anyOf:
+    - type: integer
+    - type: string
+      enum:
+        - none
+        - all
+        - any
+    - type: array
+      items:
+        type: integer
+
+ModelField:
+  type: object
+  properties:
+    name:
+      type: string
+    ord:
+      type: integer
+    sticky:
+      type: boolean
+    rtl:
+      type: boolean
+    font:
+      type: string
+    size:
+      type: integer
+  required:
+  - name
+  - ord
+  - sticky
+  - rtl
+  - font
+  - size
+
+ModelTemplate:
+  type: object
+  properties:
+    name:
+      type: string
+    ord:
+      type: integer
+    qfmt:
+      type: string
+    afmt:
+      type: string
+    did:
+      type: string
+      nullable: true
+    bqfmt:
+      type: string
+    bafmt:
+      type: string
+    bfont:
+      type: string
+    bsize:
+      type: integer
+  required:
+  - name
+  - ord
+  - qfmt
+  - afmt
+  - did
+  - bqfmt
+  - bafmt
+  - bfont
+  - bsize

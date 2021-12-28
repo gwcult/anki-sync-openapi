@@ -1,0 +1,44 @@
+ChunkPayload:
+  type: object
+  properties:
+    changes:
+      $ref: "#/Chunk"
+Chunk:
+  type: object
+  properties:
+    done:
+      type: boolean
+    notes:
+      type: array
+      items:
+        $ref: "#/NoteValues"
+    cards:
+      type: array
+      items:
+        $ref: "#/CardValues"
+    revlog:
+      type: array
+      items:
+        $ref: "#/RevlogValues"
+RevlogValues:
+  type: array
+  minimum: 9
+  maximum: 9
+  items:
+    type: integer
+NoteValues:
+  type: array
+  minimum: 11
+  maximum: 11
+  items:
+    allOf:
+      - type: integer
+      - type: string
+CardValues:
+  type: array
+  minimum: 18
+  maximum: 18
+  items:
+    allOf:
+      - type: integer
+      - type: string

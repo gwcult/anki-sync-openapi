@@ -1,0 +1,62 @@
+Payload:
+  type: object
+  properties:
+    c:
+      type: integer
+      minimum: 0
+      maximum: 1
+      example: 0
+      description: GZip compression enabled
+    data:
+      type: string
+      format: binary
+  required:
+    - "c"
+    - "data"
+Auth:
+  type: object
+  description: authentication object used during the not-media synchronization
+  properties:
+    k:
+      type: string
+      description: server-defined HostKey - used to authenticate the user
+    s:
+      type: string
+      description: app-defined SessionKey - used to identify the session
+  required:
+    - "k"
+    - "s"
+PayloadWithAuth:
+  type: object
+  allOf:
+    - $ref: "#/Payload"
+    - $ref: "#/Auth"
+SessionAuth:
+  type: object
+  properties:
+    sk:
+      type: string
+      description: server-defined SessionKey - used to identify the session
+  required:
+    - "sk"
+HostKeyAuth:
+  type: object
+  properties:
+    k:
+      type: string
+      description: server-defined HostKey - used to authenticate the user
+    v:
+      type: string
+  required:
+    - "k"
+    - "v"
+PayloadWithSessionAuth:
+  type: object
+  allOf:
+    - $ref: "#/Payload"
+    - $ref: "#/SessionAuth"
+PayloadWithHostKeyAuth:
+  type: object
+  allOf:
+    - $ref: "#/Payload"
+    - $ref: "#/HostKeyAuth"

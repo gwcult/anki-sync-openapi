@@ -1,0 +1,323 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json
+openapi: 3.0.3
+servers:
+  - url: http://127.0.0.1:8223/127.0.0.1:8222
+  - url: http://127.0.0.1:8223/sync.ankiweb.net
+info:
+  description: Api for Anki Synchronization
+  version: 0.0.1
+  title: Anki Sync Api
+  license:
+    name: public domain
+tags:
+  - name: logIn
+  - name: dataSync
+  - name: mediaSync
+  - name: fullSync
+paths:
+  /sync/hostKey:
+    post:
+      tags:
+        - logIn
+      operationId: getHostKey
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HostKey"
+  /sync/meta:
+    post:
+      tags:
+        - dataSync
+      operationId: getMeta
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Meta"
+  /sync/start:
+    post:
+      tags:
+        - dataSync
+      operationId: start
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Graves"
+  /sync/applyChanges:
+    post:
+      tags:
+        - dataSync
+      operationId: applyChanges
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Changes"
+  /sync/abort:
+    post:
+      tags:
+        - dataSync
+      operationId: abort
+      requestBody:
+        $ref: "#/components/requestBodies/AuthRB"
+      responses:
+        "200":
+          description: OK
+  /sync/chunk:
+    post:
+      tags:
+        - dataSync
+      operationId: chunk
+      requestBody:
+        $ref: "#/components/requestBodies/AuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chunk"
+  /sync/applyChunk:
+    post:
+      tags:
+        - dataSync
+      operationId: applyChunk
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithAuthRB"
+      responses:
+        "200":
+          description: OK
+  /sync/sanityCheck2:
+    post:
+      tags:
+        - dataSync
+      operationId: sanityCheck2
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SanityResult"
+  /sync/finish:
+    post:
+      tags:
+        - dataSync
+      operationId: finish
+      requestBody:
+        $ref: "#/components/requestBodies/AuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: number
+  /msync/begin:
+    post:
+      tags:
+        - mediaSync
+      operationId: startMediaSync
+      requestBody:
+        $ref: "#/components/requestBodies/HostKeyAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MediaStartResult"
+  /msync/mediaChanges:
+    post:
+      tags:
+        - mediaSync
+      operationId: getMediaChanges
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithSessionAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetMediaChangesResult"
+  /msync/downloadFiles:
+    post:
+      tags:
+        - mediaSync
+      operationId: downloadFiles
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithSessionAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+  /msync/uploadChanges:
+    post:
+      tags:
+        - mediaSync
+      operationId: uploadMediaChanges
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithSessionAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadMediaChangesResult"
+  /msync/mediaSanity:
+    post:
+      tags:
+        - mediaSync
+      operationId: checkMediaSanity
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithSessionAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MediaSanityResult"
+  /sync/upload:
+    post:
+      tags:
+        - fullSync
+      operationId: uploadFull
+      requestBody:
+        $ref: "#/components/requestBodies/PayloadWithHostKeyAuthRB"
+      responses:
+        "200":
+          description: OK
+  /sync/download:
+    post:
+      tags:
+        - fullSync
+      operationId: downloadFull
+      requestBody:
+        $ref: "#/components/requestBodies/HostKeyAuthRB"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    Payload:
+      $ref: "./schemas/base.yaml#/Payload"
+    Auth:
+      $ref: "./schemas/base.yaml#/Auth"
+    PayloadWithAuth:
+      $ref: "./schemas/base.yaml#/PayloadWithAuth"
+    Credentials:
+      $ref: "./schemas/login.yaml#/Credentials"
+    HostKey:
+      $ref: "./schemas/login.yaml#/HostKey"
+    Versions:
+      $ref: "./schemas/meta.yaml#/Versions"
+    Meta:
+      $ref: "./schemas/meta.yaml#/Meta"
+    Start:
+      $ref: "./schemas/start.yaml#/Start"
+    Graves:
+      $ref: "./schemas/start.yaml#/Graves"
+    ChangesPayload:
+      $ref: "./schemas/changes.yaml#/ChangesPayload"
+    Changes:
+      $ref: "./schemas/changes.yaml#/Changes"
+    ChunkPayload:
+      $ref: "./schemas/chunk.yaml#/ChunkPayload"
+    Chunk:
+      $ref: "./schemas/chunk.yaml#/Chunk"
+    SanityParams:
+      $ref: "./schemas/sanity.yaml#/SanityParams"
+    SanityResult:
+      $ref: "./schemas/sanity.yaml#/SanityResult"
+    SessionAuth:
+      $ref: "./schemas/base.yaml#/SessionAuth"
+    HostKeyAuth:
+      $ref: "./schemas/base.yaml#/HostKeyAuth"
+    PayloadWithSessionAuth:
+      $ref: "./schemas/base.yaml#/PayloadWithSessionAuth"
+    PayloadWithHostKeyAuth:
+      $ref: "./schemas/base.yaml#/PayloadWithHostKeyAuth"
+    MediaStartResult:
+      $ref: "./schemas/media.yaml#/MediaStartResult"
+    GetMediaChangesParams:
+      $ref: "./schemas/media.yaml#/GetMediaChangesParams"
+    GetMediaChangesResult:
+      $ref: "./schemas/media.yaml#/GetMediaChangesResult"
+    DownloadFilesParams:
+      $ref: "./schemas/media.yaml#/DownloadFilesParams"
+    UploadMediaChangesResult:
+      $ref: "./schemas/media.yaml#/UploadMediaChangesResult"
+    MediaSanityParams:
+      $ref: "./schemas/media.yaml#/MediaSanityParams"
+    MediaSanityResult:
+      $ref: "./schemas/media.yaml#/MediaSanityResult"
+  requestBodies:
+    PayloadRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: "#/components/schemas/Payload"
+    AuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: "#/components/schemas/Auth"
+    PayloadWithAuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: "#/components/schemas/PayloadWithAuth"
+    HostKeyAuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: "#/components/schemas/HostKeyAuth"
+    PayloadWithSessionAuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: "#/components/schemas/PayloadWithSessionAuth"
+    PayloadWithHostKeyAuthRB:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: "#/components/schemas/PayloadWithHostKeyAuth"
+    

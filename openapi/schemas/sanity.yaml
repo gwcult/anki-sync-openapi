@@ -1,0 +1,11 @@
+SanityParams:
+  type: object
+  properties:
+    client:
+      type: array
+SanityResult:
+  type: object
+  properties:
+    status:
+      type: string
+      example: "ok"

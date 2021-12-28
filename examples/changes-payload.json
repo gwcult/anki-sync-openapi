@@ -1,0 +1,151 @@
+{
+    "changes": {
+        "models": [],
+        "decks": [
+            [
+                {
+                    "id": 1,
+                    "mod": 1640511829,
+                    "name": "Default",
+                    "usn": 0,
+                    "lrnToday": [
+                        0,
+                        0
+                    ],
+                    "revToday": [
+                        0,
+                        0
+                    ],
+                    "newToday": [
+                        0,
+                        0
+                    ],
+                    "timeToday": [
+                        0,
+                        0
+                    ],
+                    "collapsed": true,
+                    "browserCollapsed": true,
+                    "desc": "",
+                    "dyn": 0,
+                    "conf": 1,
+                    "extendNew": 0,
+                    "extendRev": 0,
+                    "mid": 1640511728288
+                },
+                {
+                    "newToday": [
+                        0,
+                        1
+                    ],
+                    "revToday": [
+                        0,
+                        0
+                    ],
+                    "lrnToday": [
+                        0,
+                        1
+                    ],
+                    "timeToday": [
+                        0,
+                        5907
+                    ],
+                    "conf": 1,
+                    "usn": 0,
+                    "desc": "",
+                    "dyn": 0,
+                    "collapsed": false,
+                    "browserCollapsed": false,
+                    "extendNew": 0,
+                    "extendRev": 0,
+                    "name": "Deck1",
+                    "id": 1640511749178,
+                    "mod": 1640511840
+                },
+                {
+                    "newToday": [
+                        0,
+                        0
+                    ],
+                    "revToday": [
+                        0,
+                        0
+                    ],
+                    "lrnToday": [
+                        0,
+                        0
+                    ],
+                    "timeToday": [
+                        0,
+                        0
+                    ],
+                    "conf": 1,
+                    "usn": 0,
+                    "desc": "",
+                    "dyn": 0,
+                    "collapsed": false,
+                    "browserCollapsed": false,
+                    "extendNew": 0,
+                    "extendRev": 0,
+                    "name": "Deck2",
+                    "id": 1640511754569,
+                    "mod": 1640511754
+                },
+                {
+                    "newToday": [
+                        0,
+                        0
+                    ],
+                    "revToday": [
+                        0,
+                        0
+                    ],
+                    "lrnToday": [
+                        0,
+                        0
+                    ],
+                    "timeToday": [
+                        0,
+                        0
+                    ],
+                    "conf": 1,
+                    "usn": 0,
+                    "desc": "",
+                    "dyn": 0,
+                    "collapsed": false,
+                    "browserCollapsed": false,
+                    "extendNew": 0,
+                    "extendRev": 0,
+                    "name": "Deck1::SubDeck1",
+                    "id": 1640511773022,
+                    "mod": 1640511773
+                }
+            ],
+            []
+        ],
+        "tags": [
+            "Tag1",
+            "Tag2"
+        ],
+        "conf": {
+            "collapseTime": 1200,
+            "curDeck": 1640511773022,
+            "dayLearnFirst": false,
+            "timeLim": 0,
+            "dueCounts": true,
+            "curModel": 1640511728288,
+            "addToCur": true,
+            "activeDecks": [
+                1640511773022
+            ],
+            "nextPos": 3,
+            "estTimes": true,
+            "sortBackwards": false,
+            "schedVer": 1,
+            "sortType": "noteFld",
+            "newSpread": 0,
+            "newBury": true
+        },
+        "crt": 1640487600
+    }
+}

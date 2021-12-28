@@ -1,0 +1,24 @@
+Start:
+  type: object
+  properties:
+    minUsn:
+      type: integer
+    lnewer:
+      type: boolean
+    graves:
+      $ref: "#/Graves"
+Graves:
+  type: object
+  properties:
+    cards:
+      type: array
+      items:
+        type: integer
+    notes:
+      type: array
+      items:
+        type: integer
+    decks:
+      type: array
+      items:
+        type: integer
