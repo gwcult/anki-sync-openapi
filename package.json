@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "bundle": "swagger-cli bundle openapi/openapi.yaml --outfile openapi/openapi.bundle.yaml --type yaml",
+    "validate": "swagger-cli validate openapi/openapi.yaml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "https://github.com/gwcult",

@@ -31,8 +31,8 @@ GetMediaChangesResult:
           allOf:
           - type: integer
           - type: string
-  err:
-    type: string
+    err:
+      type: string
 DownloadFilesParams:
   type: object
   properties:

@@ -3,6 +3,16 @@ SanityParams:
   properties:
     client:
       type: array
+      minimum: 8
+      maximum: 8
+      items:
+        anyOf:
+          - type: array
+            items:
+                type: integer
+                minimum: 3
+                maximum: 3
+          - type: integer
 SanityResult:
   type: object
   properties:
