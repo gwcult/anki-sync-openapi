@@ -615,6 +615,16 @@ components:
       properties:
         client:
           type: array
+          minimum: 8
+          maximum: 8
+          items:
+            anyOf:
+              - type: array
+                items:
+                  type: integer
+                  minimum: 3
+                  maximum: 3
+              - type: integer
     SanityResult:
       type: object
       properties:
@@ -681,8 +691,8 @@ components:
               allOf:
                 - type: integer
                 - type: string
-      err:
-        type: string
+        err:
+          type: string
     DownloadFilesParams:
       type: object
       properties:
