@@ -33,37 +33,37 @@ Model:
       type: integer
     req:
       type: array
-      items: 
+      items:
         $ref: "#/ModelRequirements"
   required:
-  - sortf
-  - did
-  - latexPre
-  - latexPost
-  - latexsvg
-  - mod
-  - usn
-  - type
-  - css
-  - name
-  - flds
-  - tmpls
-  - id
-  - req
-  
+    - sortf
+    - did
+    - latexPre
+    - latexPost
+    - latexsvg
+    - mod
+    - usn
+    - type
+    - css
+    - name
+    - flds
+    - tmpls
+    - id
+    - req
+
 ModelRequirements:
   type: array
   items:
     anyOf:
-    - type: integer
-    - type: string
-      enum:
-        - none
-        - all
-        - any
-    - type: array
-      items:
-        type: integer
+      - type: integer
+      - type: string
+        enum:
+          - none
+          - all
+          - any
+      - type: array
+        items:
+          type: integer
 
 ModelField:
   type: object
@@ -81,12 +81,12 @@ ModelField:
     size:
       type: integer
   required:
-  - name
-  - ord
-  - sticky
-  - rtl
-  - font
-  - size
+    - name
+    - ord
+    - sticky
+    - rtl
+    - font
+    - size
 
 ModelTemplate:
   type: object
@@ -111,12 +111,12 @@ ModelTemplate:
     bsize:
       type: integer
   required:
-  - name
-  - ord
-  - qfmt
-  - afmt
-  - did
-  - bqfmt
-  - bafmt
-  - bfont
-  - bsize
+    - name
+    - ord
+    - qfmt
+    - afmt
+    - did
+    - bqfmt
+    - bafmt
+    - bfont
+    - bsize

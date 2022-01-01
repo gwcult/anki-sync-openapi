@@ -269,10 +269,15 @@ components:
           type: string
         p:
           type: string
+      required:
+        - u
+        - p
     HostKey:
       properties:
         key:
           type: string
+      required:
+        - key
     Versions:
       type: object
       properties:
@@ -280,6 +285,9 @@ components:
           type: string
         cv:
           type: string
+      required:
+        - v
+        - cv
     Meta:
       type: object
       properties:
@@ -301,6 +309,15 @@ components:
           type: boolean
         hostNum:
           type: integer
+      required:
+        - mod
+        - scm
+        - usn
+        - ts
+        - musn
+        - msg
+        - cont
+        - hostNum
     Start:
       type: object
       properties:
@@ -310,6 +327,10 @@ components:
           type: boolean
         graves:
           $ref: '#/components/schemas/Graves'
+      required:
+        - minUsn
+        - lnewer
+        - graves
     Graves:
       type: object
       properties:
@@ -325,11 +346,17 @@ components:
           type: array
           items:
             type: integer
+      required:
+        - cards
+        - notes
+        - decks
     ChangesPayload:
       type: object
       properties:
         changes:
           $ref: '#/components/schemas/Changes'
+      required:
+        - changes
     Changes:
       type: object
       properties:
@@ -569,14 +596,39 @@ components:
               type: integer
             rollover:
               type: integer
+          required:
+            - curDeck
+            - activeDecks
+            - newSpread
+            - collapseTime
+            - timeLim
+            - estTimes
+            - dueCounts
+            - curModel
+            - nextPos
+            - sortType
+            - sortBackwards
+            - addToCur
+            - dayLearnFirst
+            - newBury
+            - schedVer
+            - rollover
         crt:
           type: integer
           format: timestamp
+      required:
+        - models
+        - decks
+        - tags
+        - conf
+        - crt
     ChunkPayload:
       type: object
       properties:
         changes:
           $ref: '#/components/schemas/Chunk'
+      required:
+        - changes
     Chunk:
       type: object
       properties:
@@ -610,6 +662,11 @@ components:
             maximum: 9
             items:
               type: integer
+      required:
+        - done
+        - notes
+        - cards
+        - revlog
     SanityParams:
       type: object
       properties:
@@ -625,12 +682,16 @@ components:
                   minimum: 3
                   maximum: 3
               - type: integer
+      required:
+        - client
     SanityResult:
       type: object
       properties:
         status:
           type: string
           example: ok
+      required:
+        - status
     SessionAuth:
       type: object
       properties:

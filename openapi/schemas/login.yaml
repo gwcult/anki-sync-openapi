@@ -4,7 +4,12 @@ Credentials:
       type: string
     p:
       type: string
+  required:
+    - u
+    - p
 HostKey:
   properties:
     key:
       type: string
+  required:
+    - key

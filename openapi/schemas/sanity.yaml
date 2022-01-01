@@ -9,13 +9,17 @@ SanityParams:
         anyOf:
           - type: array
             items:
-                type: integer
-                minimum: 3
-                maximum: 3
+              type: integer
+              minimum: 3
+              maximum: 3
           - type: integer
+  required:
+    - client
 SanityResult:
   type: object
   properties:
     status:
       type: string
       example: "ok"
+  required:
+    - status

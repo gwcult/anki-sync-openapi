@@ -1,10 +1,13 @@
 Versions:
   type: object
   properties:
-    v: 
+    v:
       type: string
     cv:
       type: string
+  required:
+    - v
+    - cv
 Meta:
   type: object
   properties:
@@ -26,3 +29,12 @@ Meta:
       type: boolean
     hostNum:
       type: integer
+  required:
+    - mod
+    - scm
+    - usn
+    - ts
+    - musn
+    - msg
+    - cont
+    - hostNum

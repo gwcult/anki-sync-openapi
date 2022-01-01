@@ -29,8 +29,8 @@ GetMediaChangesResult:
           maximum: 3
           nullable: true
           allOf:
-          - type: integer
-          - type: string
+            - type: integer
+            - type: string
     err:
       type: string
 DownloadFilesParams:

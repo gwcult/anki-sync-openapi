@@ -3,6 +3,8 @@ ChangesPayload:
   properties:
     changes:
       $ref: "#/Changes"
+  required:
+    - changes
 Changes:
   type: object
   properties:
@@ -23,7 +25,12 @@ Changes:
     crt:
       type: integer
       format: timestamp
-
+  required:
+    - models
+    - decks
+    - tags
+    - conf
+    - crt
 Deck:
   type: object
   properties:
@@ -82,21 +89,21 @@ Deck:
     mod:
       type: integer
   required:
-  - newToday
-  - revToday
-  - lrnToday
-  - timeToday
-  - conf
-  - usn
-  - desc
-  - dyn
-  - collapsed
-  - browserCollapsed
-  - extendNew
-  - extendRev
-  - name
-  - id
-  - mod
+    - newToday
+    - revToday
+    - lrnToday
+    - timeToday
+    - conf
+    - usn
+    - desc
+    - dyn
+    - collapsed
+    - browserCollapsed
+    - extendNew
+    - extendRev
+    - name
+    - id
+    - mod
 Configuration:
   type: object
   properties:
@@ -139,3 +146,20 @@ Configuration:
       type: integer
     rollover:
       type: integer
+  required:
+    - curDeck
+    - activeDecks
+    - newSpread
+    - collapseTime
+    - timeLim
+    - estTimes
+    - dueCounts
+    - curModel
+    - nextPos
+    - sortType
+    - sortBackwards
+    - addToCur
+    - dayLearnFirst
+    - newBury
+    - schedVer
+    - rollover

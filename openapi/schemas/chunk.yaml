@@ -3,6 +3,8 @@ ChunkPayload:
   properties:
     changes:
       $ref: "#/Chunk"
+  required:
+    - changes
 Chunk:
   type: object
   properties:
@@ -20,6 +22,11 @@ Chunk:
       type: array
       items:
         $ref: "#/RevlogValues"
+  required:
+    - done
+    - notes
+    - cards
+    - revlog
 RevlogValues:
   type: array
   minimum: 9

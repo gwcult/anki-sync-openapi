@@ -7,6 +7,10 @@ Start:
       type: boolean
     graves:
       $ref: "#/Graves"
+  required:
+    - minUsn
+    - lnewer
+    - graves
 Graves:
   type: object
   properties:
@@ -22,3 +26,7 @@ Graves:
       type: array
       items:
         type: integer
+  required:
+    - cards
+    - notes
+    - decks
