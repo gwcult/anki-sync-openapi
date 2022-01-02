@@ -38,7 +38,7 @@ NoteValues:
   minimum: 11
   maximum: 11
   items:
-    allOf:
+    anyOf:
       - type: integer
       - type: string
 CardValues:
@@ -46,6 +46,6 @@ CardValues:
   minimum: 18
   maximum: 18
   items:
-    allOf:
+    anyOf:
       - type: integer
       - type: string

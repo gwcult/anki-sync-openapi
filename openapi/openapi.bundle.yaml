@@ -477,79 +477,200 @@ components:
               - req
         decks:
           type: array
+          minimum: 2
+          maximum: 2
           items:
-            type: object
-            properties:
-              newToday:
-                type: array
-                minimum: 2
-                maximum: 2
-                items:
-                  type: array
-                  items:
-                    type: integer
-              revToday:
-                type: array
-                minimum: 2
-                maximum: 2
-                items:
-                  type: array
-                  items:
-                    type: integer
-              lrnToday:
-                type: array
-                minimum: 2
-                maximum: 2
-                items:
-                  type: array
-                  items:
-                    type: integer
-              timeToday:
-                type: array
-                minimum: 2
-                maximum: 2
-                items:
-                  type: array
-                  items:
-                    type: integer
-              conf:
-                type: integer
-              usn:
-                type: integer
-              desc:
-                type: string
-              dyn:
-                type: integer
-              collapsed:
-                type: boolean
-              browserCollapsed:
-                type: boolean
-              extendNew:
-                type: integer
-              extendRev:
-                type: integer
-              name:
-                type: string
-              id:
-                type: integer
-              mod:
-                type: integer
-            required:
-              - newToday
-              - revToday
-              - lrnToday
-              - timeToday
-              - conf
-              - usn
-              - desc
-              - dyn
-              - collapsed
-              - browserCollapsed
-              - extendNew
-              - extendRev
-              - name
-              - id
-              - mod
+            type: array
+            items:
+              anyOf:
+                - type: object
+                  properties:
+                    newToday:
+                      type: array
+                      minimum: 2
+                      maximum: 2
+                      items:
+                        type: array
+                        items:
+                          type: integer
+                    revToday:
+                      type: array
+                      minimum: 2
+                      maximum: 2
+                      items:
+                        type: array
+                        items:
+                          type: integer
+                    lrnToday:
+                      type: array
+                      minimum: 2
+                      maximum: 2
+                      items:
+                        type: array
+                        items:
+                          type: integer
+                    timeToday:
+                      type: array
+                      minimum: 2
+                      maximum: 2
+                      items:
+                        type: array
+                        items:
+                          type: integer
+                    conf:
+                      type: integer
+                    usn:
+                      type: integer
+                    desc:
+                      type: string
+                    dyn:
+                      type: integer
+                    collapsed:
+                      type: boolean
+                    browserCollapsed:
+                      type: boolean
+                    extendNew:
+                      type: integer
+                    extendRev:
+                      type: integer
+                    name:
+                      type: string
+                    id:
+                      type: integer
+                    mod:
+                      type: integer
+                  required:
+                    - newToday
+                    - revToday
+                    - lrnToday
+                    - timeToday
+                    - conf
+                    - usn
+                    - desc
+                    - dyn
+                    - collapsed
+                    - browserCollapsed
+                    - extendNew
+                    - extendRev
+                    - name
+                    - id
+                    - mod
+                - type: object
+                  properties:
+                    id:
+                      type: integer
+                    mod:
+                      type: integer
+                    name:
+                      type: string
+                    usn:
+                      type: integer
+                    maxTaken:
+                      type: integer
+                    autoplay:
+                      type: boolean
+                    timer:
+                      type: integer
+                    replayq:
+                      type: boolean
+                    new:
+                      type: object
+                      properties:
+                        bury:
+                          type: boolean
+                        delays:
+                          type: array
+                          items:
+                            type: integer
+                        initialFactor:
+                          type: integer
+                        ints:
+                          type: array
+                          minimum: 3
+                          maximum: 3
+                          items:
+                            type: integer
+                        order:
+                          type: integer
+                        perDay:
+                          type: integer
+                      required:
+                        - bury
+                        - delays
+                        - initialFactor
+                        - ints
+                        - order
+                        - perDay
+                    rev:
+                      type: object
+                      properties:
+                        bury:
+                          type: boolean
+                        ease4:
+                          type: number
+                        ivlFct:
+                          type: integer
+                        maxIvl:
+                          type: integer
+                        perDay:
+                          type: integer
+                        hardFactor:
+                          type: number
+                      required:
+                        - bury
+                        - ease4
+                        - ivlFct
+                        - maxIvl
+                        - perDay
+                        - hardFactor
+                    lapse:
+                      type: object
+                      properties:
+                        delays:
+                          type: array
+                          items:
+                            type: integer
+                        leechAction:
+                          type: integer
+                        leechFails:
+                          type: integer
+                        minInt:
+                          type: integer
+                        mult:
+                          type: integer
+                      required:
+                        - delays
+                        - leechAction
+                        - leechFails
+                        - minInt
+                        - mult
+                    dyn:
+                      type: integer
+                    newMix:
+                      type: integer
+                    newPerDayMinimum:
+                      type: integer
+                    interdayLearningMix:
+                      type: integer
+                    reviewOrder:
+                      type: integer
+                  required:
+                    - id
+                    - mod
+                    - name
+                    - usn
+                    - maxTaken
+                    - autoplay
+                    - timer
+                    - replayq
+                    - new
+                    - rev
+                    - lapse
+                    - dyn
+                    - newMix
+                    - newPerDayMinimum
+                    - interdayLearningMix
+                    - reviewOrder
         tags:
           type: array
           items:
@@ -641,7 +762,7 @@ components:
             minimum: 11
             maximum: 11
             items:
-              allOf:
+              anyOf:
                 - type: integer
                 - type: string
         cards:
@@ -651,7 +772,7 @@ components:
             minimum: 18
             maximum: 18
             items:
-              allOf:
+              anyOf:
                 - type: integer
                 - type: string
         revlog:
@@ -749,7 +870,7 @@ components:
               minimum: 3
               maximum: 3
               nullable: true
-              allOf:
+              anyOf:
                 - type: integer
                 - type: string
         err:

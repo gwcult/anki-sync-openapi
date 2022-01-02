@@ -28,7 +28,7 @@ GetMediaChangesResult:
           minimum: 3
           maximum: 3
           nullable: true
-          allOf:
+          anyOf:
             - type: integer
             - type: string
     err:

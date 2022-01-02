@@ -14,8 +14,14 @@ Changes:
         $ref: "./model.yaml#/Model"
     decks:
       type: array
+      minimum: 2
+      maximum: 2
       items:
-        $ref: "#/Deck"
+        type: array
+        items:
+          anyOf:
+            - $ref: "#/Deck"
+            - $ref: "./deck-conf.yaml#/DeckConf"
     tags:
       type: array
       items:

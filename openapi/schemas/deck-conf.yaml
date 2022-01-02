@@ -1,0 +1,126 @@
+DeckConf:
+  type: object
+  properties:
+    id:
+      type: integer
+    mod:
+      type: integer
+    name:
+      type: string
+    usn:
+      type: integer
+    maxTaken:
+      type: integer
+    autoplay:
+      type: boolean
+    timer:
+      type: integer
+    replayq:
+      type: boolean
+    new:
+      $ref: "#/NewCardConf"
+    rev:
+      $ref: "#/ReviewCardConf"
+    lapse:
+      $ref: "#/LapseCardConf"
+    dyn:
+      type: integer
+    newMix:
+      type: integer
+    newPerDayMinimum:
+      type: integer
+    interdayLearningMix:
+      type: integer
+    reviewOrder:
+      type: integer
+  required:
+    - id
+    - mod
+    - name
+    - usn
+    - maxTaken
+    - autoplay
+    - timer
+    - replayq
+    - new
+    - rev
+    - lapse
+    - dyn
+    - newMix
+    - newPerDayMinimum
+    - interdayLearningMix
+    - reviewOrder
+
+NewCardConf:
+  type: object
+  properties:
+    bury:
+      type: boolean
+    delays:
+      type: array
+      items:
+        type: integer
+    initialFactor:
+      type: integer
+    ints:
+      type: array
+      minimum: 3
+      maximum: 3
+      items:
+        type: integer
+    order:
+      type: integer
+    perDay:
+      type: integer
+  required:
+    - bury
+    - delays
+    - initialFactor
+    - ints
+    - order
+    - perDay
+
+ReviewCardConf:
+  type: object
+  properties:
+    bury:
+      type: boolean
+    ease4:
+      type: number
+    ivlFct:
+      type: integer
+    maxIvl:
+      type: integer
+    perDay:
+      type: integer
+    hardFactor:
+      type: number
+  required:
+    - bury
+    - ease4
+    - ivlFct
+    - maxIvl
+    - perDay
+    - hardFactor
+
+LapseCardConf:
+  type: object
+  properties:
+    delays:
+      type: array
+      items:
+        type: integer
+    leechAction:
+      type: integer
+    leechFails:
+      type: integer
+    minInt:
+      type: integer
+    mult:
+      type: integer
+  required:
+    - delays
+    - leechAction
+    - leechFails
+    - minInt
+    - mult
