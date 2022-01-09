@@ -379,7 +379,7 @@ components:
           items:
             type: string
         conf:
-          $ref: '#/components/schemas/Configuration'
+          $ref: '#/components/schemas/AppConfiguration'
         crt:
           type: integer
           format: timestamp
@@ -951,7 +951,7 @@ components:
         - leechFails
         - minInt
         - mult
-    Configuration:
+    AppConfiguration:
       type: object
       properties:
         curDeck:
