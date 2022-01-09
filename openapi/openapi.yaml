@@ -309,7 +309,7 @@ components:
     LapseCardConf:
       $ref: "./schemas/entities/deck-conf.yaml#/LapseCardConf"
     Configuration:
-      $ref: "./schemas/entities/configuration.yaml#/Configuration"
+      $ref: "./schemas/entities/app-configuration.yaml#/AppConfiguration"
     CollectionInfo:
       $ref: "./schemas/entities/collection-info.yaml#/CollectionInfo"
     Card:

@@ -27,7 +27,7 @@ Changes:
       items:
         type: string
     conf:
-      $ref: "./entities/configuration.yaml#/Configuration"
+      $ref: "./entities/app-configuration.yaml#/AppConfiguration"
     crt:
       type: integer
       format: timestamp

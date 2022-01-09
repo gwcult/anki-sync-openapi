@@ -1,4 +1,4 @@
-Configuration:
+AppConfiguration:
   type: object
   properties:
     curDeck:
