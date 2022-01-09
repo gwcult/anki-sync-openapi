@@ -308,7 +308,7 @@ components:
       $ref: "./schemas/entities/deck-conf.yaml#/ReviewCardConf"
     LapseCardConf:
       $ref: "./schemas/entities/deck-conf.yaml#/LapseCardConf"
-    Configuration:
+    AppConfiguration:
       $ref: "./schemas/entities/app-configuration.yaml#/AppConfiguration"
     CollectionInfo:
       $ref: "./schemas/entities/collection-info.yaml#/CollectionInfo"
