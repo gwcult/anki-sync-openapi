@@ -1,0 +1,28 @@
+CollectionInfo:
+  type: object
+  properties:
+    id:
+      type: integer
+    crt:
+      type: integer
+    mod:
+      type: integer
+    scm:
+      type: integer
+    ver:
+      type: integer
+    dty:
+      type: integer
+    usn:
+      type: integer
+    ls:
+      type: integer
+  required:
+    - id
+    - crt
+    - mod
+    - scm
+    - ver
+    - dty
+    - usn
+    - ls

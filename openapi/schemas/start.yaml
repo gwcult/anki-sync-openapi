@@ -6,12 +6,12 @@ Start:
     lnewer:
       type: boolean
     graves:
-      $ref: "#/Graves"
+      $ref: "#/GravesCollection"
   required:
     - minUsn
     - lnewer
     - graves
-Graves:
+GravesCollection:
   type: object
   properties:
     cards:

@@ -1,0 +1,64 @@
+Card:
+  type: object
+  properties:
+    id:
+      type: integer
+    nid:
+      type: integer
+    did:
+      type: integer
+    ord:
+      type: integer
+      minimum: 0
+    mod:
+      type: integer
+      minimum: 0
+    usn:
+      type: integer
+    type:
+      type: integer
+      minimum: 0
+      maximum: 3
+    queue:
+      type: integer
+      minimum: -3
+      maximum: 4
+    due:
+      type: integer
+    ivl:
+      type: integer
+    factor:
+      type: integer
+    reps:
+      type: integer
+    lapses:
+      type: integer
+    left:
+      type: integer
+    odue:
+      type: integer
+    odid:
+      type: integer
+    flags:
+      type: integer
+    data:
+      type: string
+  required:
+    - id
+    - nid
+    - did
+    - ord
+    - mod
+    - usn
+    - type
+    - queue
+    - due
+    - ivl
+    - factor
+    - repos
+    - lapses
+    - left
+    - odue
+    - odid
+    - flags
+    - data

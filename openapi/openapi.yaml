@@ -56,7 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Graves"
+                $ref: "#/components/schemas/GravesCollection"
   /sync/applyChanges:
     post:
       tags:
@@ -247,8 +247,8 @@ components:
       $ref: "./schemas/meta.yaml#/Meta"
     Start:
       $ref: "./schemas/start.yaml#/Start"
-    Graves:
-      $ref: "./schemas/start.yaml#/Graves"
+    GravesCollection:
+      $ref: "./schemas/start.yaml#/GravesCollection"
     ChangesPayload:
       $ref: "./schemas/changes.yaml#/ChangesPayload"
     Changes:
@@ -283,6 +283,37 @@ components:
       $ref: "./schemas/media.yaml#/MediaSanityParams"
     MediaSanityResult:
       $ref: "./schemas/media.yaml#/MediaSanityResult"
+    #Entities
+    Revlog:
+      $ref: "./schemas/entities/revlog.yaml#/Revlog"
+    Note:
+      $ref: "./schemas/entities/note.yaml#/Note"
+    Model:
+      $ref: "./schemas/entities/model.yaml#/Model"
+    ModelRequirements:
+      $ref: "./schemas/entities/model.yaml#/ModelRequirements"
+    ModelField:
+      $ref: "./schemas/entities/model.yaml#/ModelField"
+    ModelTemplate:
+      $ref: "./schemas/entities/model.yaml#/ModelTemplate"
+    Grave:
+      $ref: "./schemas/entities/grave.yaml#/Grave"
+    Deck:
+      $ref: "./schemas/entities/deck.yaml#/Deck"
+    DeckConf:
+      $ref: "./schemas/entities/deck-conf.yaml#/DeckConf"
+    NewCardConf:
+      $ref: "./schemas/entities/deck-conf.yaml#/NewCardConf"
+    ReviewCardConf:
+      $ref: "./schemas/entities/deck-conf.yaml#/ReviewCardConf"
+    LapseCardConf:
+      $ref: "./schemas/entities/deck-conf.yaml#/LapseCardConf"
+    Configuration:
+      $ref: "./schemas/entities/configuration.yaml#/Configuration"
+    CollectionInfo:
+      $ref: "./schemas/entities/collection-info.yaml#/CollectionInfo"
+    Card:
+      $ref: "./schemas/entities/card.yaml#/Card"
   requestBodies:
     PayloadRB:
       required: true

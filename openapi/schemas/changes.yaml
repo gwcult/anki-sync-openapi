@@ -11,7 +11,7 @@ Changes:
     models:
       type: array
       items:
-        $ref: "./model.yaml#/Model"
+        $ref: "./entities/model.yaml#/Model"
     decks:
       type: array
       minimum: 2
@@ -20,14 +20,14 @@ Changes:
         type: array
         items:
           anyOf:
-            - $ref: "#/Deck"
-            - $ref: "./deck-conf.yaml#/DeckConf"
+            - $ref: "./entities/deck.yaml#/Deck"
+            - $ref: "./entities/deck-conf.yaml#/DeckConf"
     tags:
       type: array
       items:
         type: string
     conf:
-      $ref: "#/Configuration"
+      $ref: "./entities/configuration.yaml#/Configuration"
     crt:
       type: integer
       format: timestamp
@@ -37,135 +37,3 @@ Changes:
     - tags
     - conf
     - crt
-Deck:
-  type: object
-  properties:
-    newToday:
-      type: array
-      minimum: 2
-      maximum: 2
-      items:
-        type: array
-        items:
-          type: integer
-    revToday:
-      type: array
-      minimum: 2
-      maximum: 2
-      items:
-        type: array
-        items:
-          type: integer
-    lrnToday:
-      type: array
-      minimum: 2
-      maximum: 2
-      items:
-        type: array
-        items:
-          type: integer
-    timeToday:
-      type: array
-      minimum: 2
-      maximum: 2
-      items:
-        type: array
-        items:
-          type: integer
-    conf:
-      type: integer
-    usn:
-      type: integer
-    desc:
-      type: string
-    dyn:
-      type: integer
-    collapsed:
-      type: boolean
-    browserCollapsed:
-      type: boolean
-    extendNew:
-      type: integer
-    extendRev:
-      type: integer
-    name:
-      type: string
-    id:
-      type: integer
-    mod:
-      type: integer
-  required:
-    - newToday
-    - revToday
-    - lrnToday
-    - timeToday
-    - conf
-    - usn
-    - desc
-    - dyn
-    - collapsed
-    - browserCollapsed
-    - extendNew
-    - extendRev
-    - name
-    - id
-    - mod
-Configuration:
-  type: object
-  properties:
-    curDeck:
-      type: integer
-      description: The id of the last selected deck
-    activeDecks:
-      type: array
-      items:
-        type: integer
-      description: The ids of the last selected deck and its sub-decks
-    newSpread:
-      type: integer
-      minimum: 0
-      maximum: 2
-      description: 0 - Mix new cards with reviews, 1 - New cards last, 2 - New cards first
-    collapseTime:
-      type: integer
-    timeLim:
-      type: integer
-    estTimes:
-      type: boolean
-    dueCounts:
-      type: boolean
-    curModel:
-      type: integer
-    nextPos:
-      type: integer
-    sortType:
-      type: string
-    sortBackwards:
-      type: string
-    addToCur:
-      type: boolean
-    dayLearnFirst:
-      type: boolean
-    newBury:
-      type: boolean
-    schedVer:
-      type: integer
-    rollover:
-      type: integer
-  required:
-    - curDeck
-    - activeDecks
-    - newSpread
-    - collapseTime
-    - timeLim
-    - estTimes
-    - dueCounts
-    - curModel
-    - nextPos
-    - sortType
-    - sortBackwards
-    - addToCur
-    - dayLearnFirst
-    - newBury
-    - schedVer
-    - rollover

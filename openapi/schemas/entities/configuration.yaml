@@ -1,0 +1,59 @@
+Configuration:
+  type: object
+  properties:
+    curDeck:
+      type: integer
+      description: The id of the last selected deck
+    activeDecks:
+      type: array
+      items:
+        type: integer
+      description: The ids of the last selected deck and its sub-decks
+    newSpread:
+      type: integer
+      minimum: 0
+      maximum: 2
+      description: 0 - Mix new cards with reviews, 1 - New cards last, 2 - New cards first
+    collapseTime:
+      type: integer
+    timeLim:
+      type: integer
+    estTimes:
+      type: boolean
+    dueCounts:
+      type: boolean
+    curModel:
+      type: integer
+    nextPos:
+      type: integer
+    sortType:
+      type: string
+    sortBackwards:
+      type: string
+    addToCur:
+      type: boolean
+    dayLearnFirst:
+      type: boolean
+    newBury:
+      type: boolean
+    schedVer:
+      type: integer
+    rollover:
+      type: integer
+  required:
+    - curDeck
+    - activeDecks
+    - newSpread
+    - collapseTime
+    - timeLim
+    - estTimes
+    - dueCounts
+    - curModel
+    - nextPos
+    - sortType
+    - sortBackwards
+    - addToCur
+    - dayLearnFirst
+    - newBury
+    - schedVer
+    - rollover

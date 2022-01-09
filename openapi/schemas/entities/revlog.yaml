@@ -1,0 +1,35 @@
+Revlog:
+  type: object
+  properties:
+    id:
+      type: integer
+    cid:
+      type: integer
+    usn:
+      type: integer
+    ease:
+      type: integer
+      minimum: 1
+      maximum: 4
+    ivl:
+      type: integer
+    lastIvl:
+      type: integer
+    factor:
+      type: integer
+    time:
+      type: integer
+    type:
+      type: integer
+      minimum: 0
+      maximum: 3
+  required:
+    - id
+    - cid
+    - usn
+    - ease
+    - ivl
+    - lastIvl
+    - factor
+    - time
+    - type

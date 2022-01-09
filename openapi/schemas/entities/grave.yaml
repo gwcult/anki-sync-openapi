@@ -1,0 +1,15 @@
+Grave:
+  type: object
+  properties:
+    usn:
+      type: integer
+    oid:
+      type: integer
+    type:
+      type: integer
+      minimum: 0
+      maximum: 2
+  required:
+    - usn
+    - oid
+    - type

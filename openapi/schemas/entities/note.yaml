@@ -1,0 +1,37 @@
+Note:
+  type: object
+  properties: 
+    id:
+      type: integer
+    guid:
+      type: integer
+    mid:
+      type: integer
+    mod:
+      type: integer
+    usn:
+      type: integer
+    tags:
+      type: integer
+    flds:
+      type: integer
+    sfld:
+      type: integer
+    csum:
+      type: integer
+    flags:
+      type: integer
+    data:
+      type: string
+  required:
+    - id
+    - guid
+    - mid
+    - mod
+    - usn
+    - tags
+    - flds
+    - sfld
+    - csum
+    - flags
+    - data

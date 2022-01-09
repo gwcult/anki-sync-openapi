@@ -1,0 +1,73 @@
+Deck:
+  type: object
+  properties:
+    newToday:
+      type: array
+      minimum: 2
+      maximum: 2
+      items:
+        type: array
+        items:
+          type: integer
+    revToday:
+      type: array
+      minimum: 2
+      maximum: 2
+      items:
+        type: array
+        items:
+          type: integer
+    lrnToday:
+      type: array
+      minimum: 2
+      maximum: 2
+      items:
+        type: array
+        items:
+          type: integer
+    timeToday:
+      type: array
+      minimum: 2
+      maximum: 2
+      items:
+        type: array
+        items:
+          type: integer
+    conf:
+      type: integer
+    usn:
+      type: integer
+    desc:
+      type: string
+    dyn:
+      type: integer
+    collapsed:
+      type: boolean
+    browserCollapsed:
+      type: boolean
+    extendNew:
+      type: integer
+    extendRev:
+      type: integer
+    name:
+      type: string
+    id:
+      type: integer
+    mod:
+      type: integer
+  required:
+    - newToday
+    - revToday
+    - lrnToday
+    - timeToday
+    - conf
+    - usn
+    - desc
+    - dyn
+    - collapsed
+    - browserCollapsed
+    - extendNew
+    - extendRev
+    - name
+    - id
+    - mod

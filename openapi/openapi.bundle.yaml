@@ -55,7 +55,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Graves'
+                $ref: '#/components/schemas/GravesCollection'
   /sync/applyChanges:
     post:
       tags:
@@ -326,12 +326,12 @@ components:
         lnewer:
           type: boolean
         graves:
-          $ref: '#/components/schemas/Graves'
+          $ref: '#/components/schemas/GravesCollection'
       required:
         - minUsn
         - lnewer
         - graves
-    Graves:
+    GravesCollection:
       type: object
       properties:
         cards:
@@ -363,118 +363,7 @@ components:
         models:
           type: array
           items:
-            type: object
-            properties:
-              sortf:
-                type: integer
-              did:
-                type: integer
-              latexPre:
-                type: string
-              latexPost:
-                type: string
-              latexsvg:
-                type: boolean
-              mod:
-                type: integer
-              usn:
-                type: integer
-              type:
-                type: integer
-              css:
-                type: string
-              name:
-                type: string
-              flds:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    ord:
-                      type: integer
-                    sticky:
-                      type: boolean
-                    rtl:
-                      type: boolean
-                    font:
-                      type: string
-                    size:
-                      type: integer
-                  required:
-                    - name
-                    - ord
-                    - sticky
-                    - rtl
-                    - font
-                    - size
-              tmpls:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    ord:
-                      type: integer
-                    qfmt:
-                      type: string
-                    afmt:
-                      type: string
-                    did:
-                      type: string
-                      nullable: true
-                    bqfmt:
-                      type: string
-                    bafmt:
-                      type: string
-                    bfont:
-                      type: string
-                    bsize:
-                      type: integer
-                  required:
-                    - name
-                    - ord
-                    - qfmt
-                    - afmt
-                    - did
-                    - bqfmt
-                    - bafmt
-                    - bfont
-                    - bsize
-              id:
-                type: integer
-              req:
-                type: array
-                items:
-                  type: array
-                  items:
-                    anyOf:
-                      - type: integer
-                      - type: string
-                        enum:
-                          - none
-                          - all
-                          - any
-                      - type: array
-                        items:
-                          type: integer
-            required:
-              - sortf
-              - did
-              - latexPre
-              - latexPost
-              - latexsvg
-              - mod
-              - usn
-              - type
-              - css
-              - name
-              - flds
-              - tmpls
-              - id
-              - req
+            $ref: '#/components/schemas/Model'
         decks:
           type: array
           minimum: 2
@@ -483,257 +372,14 @@ components:
             type: array
             items:
               anyOf:
-                - type: object
-                  properties:
-                    newToday:
-                      type: array
-                      minimum: 2
-                      maximum: 2
-                      items:
-                        type: array
-                        items:
-                          type: integer
-                    revToday:
-                      type: array
-                      minimum: 2
-                      maximum: 2
-                      items:
-                        type: array
-                        items:
-                          type: integer
-                    lrnToday:
-                      type: array
-                      minimum: 2
-                      maximum: 2
-                      items:
-                        type: array
-                        items:
-                          type: integer
-                    timeToday:
-                      type: array
-                      minimum: 2
-                      maximum: 2
-                      items:
-                        type: array
-                        items:
-                          type: integer
-                    conf:
-                      type: integer
-                    usn:
-                      type: integer
-                    desc:
-                      type: string
-                    dyn:
-                      type: integer
-                    collapsed:
-                      type: boolean
-                    browserCollapsed:
-                      type: boolean
-                    extendNew:
-                      type: integer
-                    extendRev:
-                      type: integer
-                    name:
-                      type: string
-                    id:
-                      type: integer
-                    mod:
-                      type: integer
-                  required:
-                    - newToday
-                    - revToday
-                    - lrnToday
-                    - timeToday
-                    - conf
-                    - usn
-                    - desc
-                    - dyn
-                    - collapsed
-                    - browserCollapsed
-                    - extendNew
-                    - extendRev
-                    - name
-                    - id
-                    - mod
-                - type: object
-                  properties:
-                    id:
-                      type: integer
-                    mod:
-                      type: integer
-                    name:
-                      type: string
-                    usn:
-                      type: integer
-                    maxTaken:
-                      type: integer
-                    autoplay:
-                      type: boolean
-                    timer:
-                      type: integer
-                    replayq:
-                      type: boolean
-                    new:
-                      type: object
-                      properties:
-                        bury:
-                          type: boolean
-                        delays:
-                          type: array
-                          items:
-                            type: integer
-                        initialFactor:
-                          type: integer
-                        ints:
-                          type: array
-                          minimum: 3
-                          maximum: 3
-                          items:
-                            type: integer
-                        order:
-                          type: integer
-                        perDay:
-                          type: integer
-                      required:
-                        - bury
-                        - delays
-                        - initialFactor
-                        - ints
-                        - order
-                        - perDay
-                    rev:
-                      type: object
-                      properties:
-                        bury:
-                          type: boolean
-                        ease4:
-                          type: number
-                        ivlFct:
-                          type: integer
-                        maxIvl:
-                          type: integer
-                        perDay:
-                          type: integer
-                        hardFactor:
-                          type: number
-                      required:
-                        - bury
-                        - ease4
-                        - ivlFct
-                        - maxIvl
-                        - perDay
-                        - hardFactor
-                    lapse:
-                      type: object
-                      properties:
-                        delays:
-                          type: array
-                          items:
-                            type: integer
-                        leechAction:
-                          type: integer
-                        leechFails:
-                          type: integer
-                        minInt:
-                          type: integer
-                        mult:
-                          type: integer
-                      required:
-                        - delays
-                        - leechAction
-                        - leechFails
-                        - minInt
-                        - mult
-                    dyn:
-                      type: integer
-                    newMix:
-                      type: integer
-                    newPerDayMinimum:
-                      type: integer
-                    interdayLearningMix:
-                      type: integer
-                    reviewOrder:
-                      type: integer
-                  required:
-                    - id
-                    - mod
-                    - name
-                    - usn
-                    - maxTaken
-                    - autoplay
-                    - timer
-                    - replayq
-                    - new
-                    - rev
-                    - lapse
-                    - dyn
-                    - newMix
-                    - newPerDayMinimum
-                    - interdayLearningMix
-                    - reviewOrder
+                - $ref: '#/components/schemas/Deck'
+                - $ref: '#/components/schemas/DeckConf'
         tags:
           type: array
           items:
             type: string
         conf:
-          type: object
-          properties:
-            curDeck:
-              type: integer
-              description: The id of the last selected deck
-            activeDecks:
-              type: array
-              items:
-                type: integer
-              description: The ids of the last selected deck and its sub-decks
-            newSpread:
-              type: integer
-              minimum: 0
-              maximum: 2
-              description: '0 - Mix new cards with reviews, 1 - New cards last, 2 - New cards first'
-            collapseTime:
-              type: integer
-            timeLim:
-              type: integer
-            estTimes:
-              type: boolean
-            dueCounts:
-              type: boolean
-            curModel:
-              type: integer
-            nextPos:
-              type: integer
-            sortType:
-              type: string
-            sortBackwards:
-              type: string
-            addToCur:
-              type: boolean
-            dayLearnFirst:
-              type: boolean
-            newBury:
-              type: boolean
-            schedVer:
-              type: integer
-            rollover:
-              type: integer
-          required:
-            - curDeck
-            - activeDecks
-            - newSpread
-            - collapseTime
-            - timeLim
-            - estTimes
-            - dueCounts
-            - curModel
-            - nextPos
-            - sortType
-            - sortBackwards
-            - addToCur
-            - dayLearnFirst
-            - newBury
-            - schedVer
-            - rollover
+          $ref: '#/components/schemas/Configuration'
         crt:
           type: integer
           format: timestamp
@@ -903,6 +549,559 @@ components:
           type: string
         err:
           type: string
+    Revlog:
+      type: object
+      properties:
+        id:
+          type: integer
+        cid:
+          type: integer
+        usn:
+          type: integer
+        ease:
+          type: integer
+          minimum: 1
+          maximum: 4
+        ivl:
+          type: integer
+        lastIvl:
+          type: integer
+        factor:
+          type: integer
+        time:
+          type: integer
+        type:
+          type: integer
+          minimum: 0
+          maximum: 3
+      required:
+        - id
+        - cid
+        - usn
+        - ease
+        - ivl
+        - lastIvl
+        - factor
+        - time
+        - type
+    Note:
+      type: object
+      properties:
+        id:
+          type: integer
+        guid:
+          type: integer
+        mid:
+          type: integer
+        mod:
+          type: integer
+        usn:
+          type: integer
+        tags:
+          type: integer
+        flds:
+          type: integer
+        sfld:
+          type: integer
+        csum:
+          type: integer
+        flags:
+          type: integer
+        data:
+          type: string
+      required:
+        - id
+        - guid
+        - mid
+        - mod
+        - usn
+        - tags
+        - flds
+        - sfld
+        - csum
+        - flags
+        - data
+    Model:
+      type: object
+      properties:
+        sortf:
+          type: integer
+        did:
+          type: integer
+        latexPre:
+          type: string
+        latexPost:
+          type: string
+        latexsvg:
+          type: boolean
+        mod:
+          type: integer
+        usn:
+          type: integer
+        type:
+          type: integer
+        css:
+          type: string
+        name:
+          type: string
+        flds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelField'
+        tmpls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelTemplate'
+        id:
+          type: integer
+        req:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelRequirements'
+      required:
+        - sortf
+        - did
+        - latexPre
+        - latexPost
+        - latexsvg
+        - mod
+        - usn
+        - type
+        - css
+        - name
+        - flds
+        - tmpls
+        - id
+        - req
+    ModelRequirements:
+      type: array
+      items:
+        anyOf:
+          - type: integer
+          - type: string
+            enum:
+              - none
+              - all
+              - any
+          - type: array
+            items:
+              type: integer
+    ModelField:
+      type: object
+      properties:
+        name:
+          type: string
+        ord:
+          type: integer
+        sticky:
+          type: boolean
+        rtl:
+          type: boolean
+        font:
+          type: string
+        size:
+          type: integer
+      required:
+        - name
+        - ord
+        - sticky
+        - rtl
+        - font
+        - size
+    ModelTemplate:
+      type: object
+      properties:
+        name:
+          type: string
+        ord:
+          type: integer
+        qfmt:
+          type: string
+        afmt:
+          type: string
+        did:
+          type: string
+          nullable: true
+        bqfmt:
+          type: string
+        bafmt:
+          type: string
+        bfont:
+          type: string
+        bsize:
+          type: integer
+      required:
+        - name
+        - ord
+        - qfmt
+        - afmt
+        - did
+        - bqfmt
+        - bafmt
+        - bfont
+        - bsize
+    Grave:
+      type: object
+      properties:
+        usn:
+          type: integer
+        oid:
+          type: integer
+        type:
+          type: integer
+          minimum: 0
+          maximum: 2
+      required:
+        - usn
+        - oid
+        - type
+    Deck:
+      type: object
+      properties:
+        newToday:
+          type: array
+          minimum: 2
+          maximum: 2
+          items:
+            type: array
+            items:
+              type: integer
+        revToday:
+          type: array
+          minimum: 2
+          maximum: 2
+          items:
+            type: array
+            items:
+              type: integer
+        lrnToday:
+          type: array
+          minimum: 2
+          maximum: 2
+          items:
+            type: array
+            items:
+              type: integer
+        timeToday:
+          type: array
+          minimum: 2
+          maximum: 2
+          items:
+            type: array
+            items:
+              type: integer
+        conf:
+          type: integer
+        usn:
+          type: integer
+        desc:
+          type: string
+        dyn:
+          type: integer
+        collapsed:
+          type: boolean
+        browserCollapsed:
+          type: boolean
+        extendNew:
+          type: integer
+        extendRev:
+          type: integer
+        name:
+          type: string
+        id:
+          type: integer
+        mod:
+          type: integer
+      required:
+        - newToday
+        - revToday
+        - lrnToday
+        - timeToday
+        - conf
+        - usn
+        - desc
+        - dyn
+        - collapsed
+        - browserCollapsed
+        - extendNew
+        - extendRev
+        - name
+        - id
+        - mod
+    DeckConf:
+      type: object
+      properties:
+        id:
+          type: integer
+        mod:
+          type: integer
+        name:
+          type: string
+        usn:
+          type: integer
+        maxTaken:
+          type: integer
+        autoplay:
+          type: boolean
+        timer:
+          type: integer
+        replayq:
+          type: boolean
+        new:
+          $ref: '#/components/schemas/NewCardConf'
+        rev:
+          $ref: '#/components/schemas/ReviewCardConf'
+        lapse:
+          $ref: '#/components/schemas/LapseCardConf'
+        dyn:
+          type: integer
+        newMix:
+          type: integer
+        newPerDayMinimum:
+          type: integer
+        interdayLearningMix:
+          type: integer
+        reviewOrder:
+          type: integer
+      required:
+        - id
+        - mod
+        - name
+        - usn
+        - maxTaken
+        - autoplay
+        - timer
+        - replayq
+        - new
+        - rev
+        - lapse
+        - dyn
+        - newMix
+        - newPerDayMinimum
+        - interdayLearningMix
+        - reviewOrder
+    NewCardConf:
+      type: object
+      properties:
+        bury:
+          type: boolean
+        delays:
+          type: array
+          items:
+            type: integer
+        initialFactor:
+          type: integer
+        ints:
+          type: array
+          minimum: 3
+          maximum: 3
+          items:
+            type: integer
+        order:
+          type: integer
+        perDay:
+          type: integer
+      required:
+        - bury
+        - delays
+        - initialFactor
+        - ints
+        - order
+        - perDay
+    ReviewCardConf:
+      type: object
+      properties:
+        bury:
+          type: boolean
+        ease4:
+          type: number
+        ivlFct:
+          type: integer
+        maxIvl:
+          type: integer
+        perDay:
+          type: integer
+        hardFactor:
+          type: number
+      required:
+        - bury
+        - ease4
+        - ivlFct
+        - maxIvl
+        - perDay
+        - hardFactor
+    LapseCardConf:
+      type: object
+      properties:
+        delays:
+          type: array
+          items:
+            type: integer
+        leechAction:
+          type: integer
+        leechFails:
+          type: integer
+        minInt:
+          type: integer
+        mult:
+          type: integer
+      required:
+        - delays
+        - leechAction
+        - leechFails
+        - minInt
+        - mult
+    Configuration:
+      type: object
+      properties:
+        curDeck:
+          type: integer
+          description: The id of the last selected deck
+        activeDecks:
+          type: array
+          items:
+            type: integer
+          description: The ids of the last selected deck and its sub-decks
+        newSpread:
+          type: integer
+          minimum: 0
+          maximum: 2
+          description: '0 - Mix new cards with reviews, 1 - New cards last, 2 - New cards first'
+        collapseTime:
+          type: integer
+        timeLim:
+          type: integer
+        estTimes:
+          type: boolean
+        dueCounts:
+          type: boolean
+        curModel:
+          type: integer
+        nextPos:
+          type: integer
+        sortType:
+          type: string
+        sortBackwards:
+          type: string
+        addToCur:
+          type: boolean
+        dayLearnFirst:
+          type: boolean
+        newBury:
+          type: boolean
+        schedVer:
+          type: integer
+        rollover:
+          type: integer
+      required:
+        - curDeck
+        - activeDecks
+        - newSpread
+        - collapseTime
+        - timeLim
+        - estTimes
+        - dueCounts
+        - curModel
+        - nextPos
+        - sortType
+        - sortBackwards
+        - addToCur
+        - dayLearnFirst
+        - newBury
+        - schedVer
+        - rollover
+    CollectionInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+        crt:
+          type: integer
+        mod:
+          type: integer
+        scm:
+          type: integer
+        ver:
+          type: integer
+        dty:
+          type: integer
+        usn:
+          type: integer
+        ls:
+          type: integer
+      required:
+        - id
+        - crt
+        - mod
+        - scm
+        - ver
+        - dty
+        - usn
+        - ls
+    Card:
+      type: object
+      properties:
+        id:
+          type: integer
+        nid:
+          type: integer
+        did:
+          type: integer
+        ord:
+          type: integer
+          minimum: 0
+        mod:
+          type: integer
+          minimum: 0
+        usn:
+          type: integer
+        type:
+          type: integer
+          minimum: 0
+          maximum: 3
+        queue:
+          type: integer
+          minimum: -3
+          maximum: 4
+        due:
+          type: integer
+        ivl:
+          type: integer
+        factor:
+          type: integer
+        reps:
+          type: integer
+        lapses:
+          type: integer
+        left:
+          type: integer
+        odue:
+          type: integer
+        odid:
+          type: integer
+        flags:
+          type: integer
+        data:
+          type: string
+      required:
+        - id
+        - nid
+        - did
+        - ord
+        - mod
+        - usn
+        - type
+        - queue
+        - due
+        - ivl
+        - factor
+        - repos
+        - lapses
+        - left
+        - odue
+        - odid
+        - flags
+        - data
   requestBodies:
     PayloadRB:
       required: true
