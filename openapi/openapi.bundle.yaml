@@ -1,13 +1,12 @@
 openapi: 3.0.3
 servers:
   - url: 'http://127.0.0.1:8223/127.0.0.1:8222'
-  - url: 'http://127.0.0.1:8223/sync.ankiweb.net'
 info:
   description: Api for Anki Synchronization
   version: 0.0.1
   title: Anki Sync Api
   license:
-    name: public domain
+    name: MIT
 tags:
   - name: logIn
   - name: dataSync
@@ -387,8 +386,6 @@ components:
         - models
         - decks
         - tags
-        - conf
-        - crt
     ChunkPayload:
       type: object
       properties:
