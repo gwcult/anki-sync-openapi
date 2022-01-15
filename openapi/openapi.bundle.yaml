@@ -587,7 +587,7 @@ components:
         id:
           type: integer
         guid:
-          type: integer
+          type: string
         mid:
           type: integer
         mod:
@@ -595,9 +595,9 @@ components:
         usn:
           type: integer
         tags:
-          type: integer
+          type: string
         flds:
-          type: integer
+          type: string
         sfld:
           type: integer
         csum:
